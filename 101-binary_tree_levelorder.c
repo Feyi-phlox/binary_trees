@@ -24,7 +24,7 @@ size_t binary_tree_height(const binary_tree_t *tree)
 }
 /**
  * do_levelorder - Helper function to traverse level of the binary tree
- * @node: Pointer to the current node
+ * @tree: Pointer to the current node
  * @func: Pointer to a function to call for each node's value
  * @level: Current level being traversed
  */
