@@ -39,7 +39,7 @@ int min_value(const binary_tree_t *tree)
 
 	if (tree == NULL)
 	{
-		return (INT_MAX);
+		return (2147483647);
 	}
 
 	leftmin = min_value(tree->left);
