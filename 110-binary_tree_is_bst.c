@@ -12,7 +12,7 @@ int max_value(const binary_tree_t *tree)
 
 	if (tree == NULL)
 	{
-		return (INT_MIN);
+		return (0);
 	}
 
 	leftmax = max_value(tree->left);
