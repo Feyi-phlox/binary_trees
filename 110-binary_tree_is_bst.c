@@ -8,18 +8,23 @@
 
 int max_value(const binary_tree_t *tree)
 {
-	int leftmax, rightmax;
+	int leftmax, rightmax, data = 0;
 
 	if (tree == NULL)
 	{
-		return (0);
+		return (INT_MIN);
 	}
 
 	leftmax = max_value(tree->left);
 	rightmax = max_value(tree->right);
 
-	return ((tree->n > leftmax && tree->n > rightmax) ? tree->n :
-			(leftmax > rightmax) ? leftmax : rightmax);
+	if (leftmax > rightmax)
+		data = leftmax;
+	else
+		data = rightmax;
+	if (data < tree->n)
+		data = tree->n;
+	return (data);
 }
 
 /**
@@ -30,7 +35,7 @@ int max_value(const binary_tree_t *tree)
 
 int min_value(const binary_tree_t *tree)
 {
-	int leftmin, rightmin;
+	int leftmin, rightmin, data = 0;
 
 	if (tree == NULL)
 	{
@@ -40,8 +45,13 @@ int min_value(const binary_tree_t *tree)
 	leftmin = min_value(tree->left);
 	rightmin = min_value(tree->right);
 
-	return ((tree->n < leftmin && tree->n < rightmin) ? tree->n :
-			(leftmin < rightmin) ? leftmin : rightmin);
+	if (leftmin < rightmin)
+		data = leftmin;
+	else
+		data = rightmin;
+	if (data > tree->n)
+		data = tree->n;
+	return (data);
 }
 
 /**
@@ -53,13 +63,20 @@ int min_value(const binary_tree_t *tree)
 int check_isbst(const binary_tree_t *tree)
 {
 	if (tree == NULL)
+	{
 		return (1);
-	if (tree->n <= min_value(tree->left) && tree->left)
+	}
+	if (tree->left && max_value(tree->left) >= tree->n)
+	{
 		return (0);
-	if (tree->n >= max_value(tree->right && tree->right)
+	}
+	if (tree->right && min_value(tree->right) <= tree->n)
+	{
 		return (0);
+	}
 
-	return (check_isbst(tree->left) && check_isbst(tree->right));
+	return (check_isbst(tree->left) &&
+		check_isbst(tree->right));
 }
 
 /**
